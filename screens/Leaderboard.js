@@ -1,10 +1,12 @@
-import { StyleSheet, Text } from "react-native";
+import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet, Text, Image, View } from "react-native";
 
-const MeScreen = () => {
+const Leaderboard = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Me</Text>
+        <Image source={require("@/assets/image/LeaderboardPage/Leaderboard1.png")/>
+      <Text style={{ color: "white" }}>Leaderboard</Text>
     </SafeAreaView>
   );
 };
@@ -19,4 +21,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MeScreen;
+export default Leaderboard;
