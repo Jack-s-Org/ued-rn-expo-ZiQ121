@@ -1,18 +1,25 @@
 import React from "react";
-import { StyleSheet, Text, Image, View, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  Image,
+  View,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
 import HorizontalScroll from "@/screens/ScrollView.js";
 import HorizontalScrollMode from "./HorizontalMoods";
 
-const NotificationsScreen = () => {
+const NotificationsScreen = ({ navigation }) => {
   const [fontsLoaded] = useFonts({
     Independent: require("@/assets/fonts/IndependentDesigner.ttf"),
   });
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
+    <View style={styles.container}>
+      <ScrollView style={{ paddingHorizontal: 4 }}>
         <Image
           source={require("@/assets/image/ExplorePage/searchBar.png")}
           style={styles.image}
@@ -28,12 +35,114 @@ const NotificationsScreen = () => {
           <Text style={styles.button}>All</Text>
         </View>
         <HorizontalScrollMode style={styles.test} />
-        <Image
-          source={require("@/assets/image/Explore/YourJourney.png")}
-          style={styles.exploreImage}
-        />
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("SpiderVerse", { screen: "Journey" });
+          }}
+        >
+          <Image
+            source={require("@/assets/image/Explore/YourJourney.png")}
+            style={styles.exploreImage}
+          />
+        </TouchableOpacity>
+
+        <View>
+          <View style={styles.accountRow}>
+            <View style={styles.leftSide}>
+              <Image
+                source={require("@/assets/image/ProfilePage2/Favourite.png")}
+                style={styles.icons}
+              />
+              <Text style={styles.text}>TOP</Text>
+            </View>
+            <Image
+              source={require("@/assets/image/ProfilePage2/right_arrow.png")}
+              style={styles.rightIcon}
+            />
+          </View>
+
+          <View style={styles.accountRow}>
+            <View style={styles.leftSide}>
+              <Image
+                source={require("@/assets/image/ProfilePage2/videos.png")}
+                style={styles.icons}
+              />
+              <Text style={styles.text}>VIDEOS</Text>
+            </View>
+            <Image
+              source={require("@/assets/image/ProfilePage2/right_arrow.png")}
+              style={styles.rightIcon}
+            />
+          </View>
+          <View style={styles.accountRow}>
+            <View style={styles.leftSide}>
+              <Image
+                source={require("@/assets/image/ProfilePage2/Downloads.png")}
+                style={styles.icons}
+              />
+              <Text style={styles.text}>HI RES</Text>
+            </View>
+            <Image
+              source={require("@/assets/image/ProfilePage2/right_arrow.png")}
+              style={styles.rightIcon}
+            />
+          </View>
+          <View style={styles.accountRow}>
+            <View style={styles.leftSide}>
+              <Image
+                source={require("@/assets/image/ProfilePage2/Subscriptions.png")}
+                style={styles.icons}
+              />
+              <Text style={styles.text}>DOLBY ATMOS</Text>
+            </View>
+            <Image
+              source={require("@/assets/image/ProfilePage2/right_arrow.png")}
+              style={styles.rightIcon}
+            />
+          </View>
+          <View style={styles.accountRow}>
+            <View style={styles.leftSide}>
+              <Image
+                source={require("@/assets/image/ProfilePage2/star1.png")}
+                style={styles.icons}
+              />
+              <Text style={styles.text}>TIDAL RISING</Text>
+            </View>
+            <Image
+              source={require("@/assets/image/ProfilePage2/right_arrow.png")}
+              style={styles.rightIcon}
+            />
+          </View>
+          <View style={styles.accountRow}>
+            <View style={styles.leftSide}>
+              <Image
+                source={require("@/assets/image/ProfilePage2/Supports.png")}
+                style={styles.icons}
+              />
+              <Text style={styles.text}>STAFF PICKS</Text>
+            </View>
+            <Image
+              source={require("@/assets/image/ProfilePage2/right_arrow.png")}
+              style={styles.rightIcon}
+            />
+          </View>
+          <View style={styles.accountRow}>
+            <View style={styles.leftSide}>
+              <Image
+                source={require("@/assets/image/ProfilePage2/collab.png")}
+                style={styles.icons}
+              />
+              <Text style={styles.text}>COLLAB</Text>
+            </View>
+            <Image
+              source={require("@/assets/image/ProfilePage2/right_arrow.png")}
+              style={styles.rightIcon}
+            />
+          </View>
+          <View style={{ height: 36 }} />
+        </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -46,7 +155,7 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     resizeMode: "contain",
-    marginTop: -50,
+    marginTop: 0,
   },
   text: {
     color: "white",
@@ -79,6 +188,28 @@ const styles = StyleSheet.create({
     width: "100%",
     resizeMode: "contain",
     marginTop: 10, // Added margin for spacing from previous content
+  },
+  rightIcon: {
+    height: 32,
+    width: 32,
+    marginLeft: "auto",
+  },
+  accountRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+    paddingHorizontal: 16,
+    marginTop: 12,
+  },
+  leftSide: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  icons: {
+    height: 32,
+    width: 32,
+    marginRight: 8,
   },
 });
 

@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   Text,
   TouchableOpacity,
@@ -7,14 +8,21 @@ import {
   Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Video, ResizeMode } from "expo-av";
 
 const SignInScreen = ({ navigation }) => {
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
   return (
     <SafeAreaView style={styles.container}>
-      <Image
-        source={require("@/assets/image/SignInPage/Tidal_Logo.png")} // Replace with your logo path
+      <Video
+        ref={video}
+        source={require("@/assets/video/logo.mp4")} // Replace with your video file
         style={styles.logo}
-        resizeMode="contain" // Ensures the logo maintains its aspect ratio
+        resizeMode={ResizeMode.CONTAIN}
+        isLooping={false}
+        shouldPlay
+        onPlaybackStatusUpdate={(status) => setStatus(() => status)}
       />
       <Text style={styles.TitleText}>WELCOME TO TIDAL</Text>
       <TouchableOpacity
@@ -43,9 +51,9 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
   },
   logo: {
-    width: 200,
-    height: 200,
-    marginBottom: 100,
+    width: 300,
+    height: 300,
+    marginBottom: 40,
   },
   TitleText: {
     fontFamily: "Independent",
@@ -69,7 +77,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontFamily: "Hagrid",
     fontSize: 18,
-    color: "#FFF",
+    color: "black",
   },
 });
 

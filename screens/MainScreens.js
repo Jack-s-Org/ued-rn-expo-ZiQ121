@@ -12,6 +12,8 @@ import SettingsScreen from "./SettingsScreen";
 import AddScreen from "./AddScreen";
 import createIconSetFromIcoMoon from "@expo/vector-icons/createIconSetFromIcoMoon";
 import { useFonts } from "expo-font";
+import MusicPageScreen from "./MusicPageScreen";
+import VideoTransition from "./VideoPlayback";
 
 // Create a single icon set configuration
 const Icon = createIconSetFromIcoMoon(
@@ -120,6 +122,21 @@ const MainScreens = () => {
         name="Settings"
         component={SettingsScreen}
         options={{ animation: "fade_from_bottom" }}
+      />
+      <MainStacks.Screen
+        name="MusicPage"
+        component={MusicPageScreen}
+        options={{
+          animation: "fade_from_bottom",
+          gestureDirection: "vertical",
+          headerShown: false,
+        }}
+      />
+
+      <MainStacks.Screen
+        name="VideoTransition"
+        component={VideoTransition}
+        options={{ headerShown: false }}
       />
     </MainStacks.Navigator>
   );

@@ -21,10 +21,6 @@ const MainStacks = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const MainTabs = () => {
-  const [unreadCount, setUnreadCount] = useState(3);
-
-  // Load fonts
-
   const [fontsLoaded] = useFonts({
     Independent: require("@/assets/fonts/IndependentDesigner.ttf"),
     IcoMoon: require("@/assets/icomoon/move ttf and .json file Here/icomoon.ttf"),
@@ -49,23 +45,23 @@ const MainTabs = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name=" "
         component={HomeScreen}
         options={{
+          headerTitle: () => (
+            <Image
+              source={require("@/assets/image/HomePage/home1.png")}
+              style={{ width: 400, height: 40 }}
+              resizeMode="contain"
+            />
+          ),
           tabBarIcon: ({ color, size }) => (
             <Icon name="Home" size={size} color={color} />
           ),
           tabBarLabel: "Home",
-          headerTitle: "Home",
-          headerTitleAlign: "left",
-          headerTitleStyle: {
-            fontFamily: "Independent",
-            fontSize: 20,
-          },
-
-          headerRight: () => <Icon name="trophy" size={24} color="lightGrey" />,
         }}
       />
+
       <Tab.Screen
         name="Explore"
         component={DiscoverScreen}
@@ -89,7 +85,7 @@ const MainTabs = () => {
             <Icon name="profile" size={size} color={color} />
           ),
           tabBarLabel: "My Profile",
-          tabBarBadge: unreadCount,
+
           headerTitleAlign: "left",
           headerTitleStyle: {
             fontFamily: "Independent",
@@ -110,12 +106,6 @@ const MainTabs = () => {
               </View>
             </SafeAreaView>
           ),
-
-          listeners: {
-            tabPress: () => {
-              setUnreadCount(null);
-            },
-          },
         }}
       />
     </Tab.Navigator>

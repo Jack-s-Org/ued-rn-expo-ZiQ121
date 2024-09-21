@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,19 +8,50 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useFonts } from "expo-font";
-import Leaderboard from "./Leaderboard";
+import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 
 const DiscoverScreen = () => {
   const navigation = useNavigation();
+  const [imageUri, setImageUri] = useState(
+    require("@/assets/image/ProfilePage2/pfp.png")
+  ); // Default image
+
+  const handleProfilePictureClick = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== "granted") {
+      Alert.alert(
+        "Permission required",
+        "Sorry, we need camera roll permissions to make this work!"
+      );
+      return;
+    }
+
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImageUri(result.assets[0].uri); // Update to selected image
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.row}>
-        <Image
-          source={require("@/assets/image/ProfilePage2/pfp.png")}
-          style={styles.Image}
-        />
+        <TouchableOpacity onPress={handleProfilePictureClick}>
+          <Image
+            source={
+              imageUri
+                ? { uri: imageUri }
+                : require("@/assets/image/ProfilePage2/pfp.png")
+            }
+            style={styles.Image}
+          />
+        </TouchableOpacity>
         <View style={{ flexDirection: "column", marginTop: 8 }}>
           <View style={styles.column}>
             <Text style={styles.Titletext}>PARKER_PB</Text>
@@ -53,7 +84,6 @@ const DiscoverScreen = () => {
             style={styles.rightIcon}
           />
         </View>
-
         <View style={styles.accountRow}>
           <View style={styles.leftSide}>
             <Image
@@ -153,7 +183,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-
   Titletext: {
     fontFamily: "Hagrid",
     fontSize: 32,
@@ -178,7 +207,6 @@ const styles = StyleSheet.create({
     width: 120,
     marginRight: 30,
   },
-
   icons: {
     height: 32,
     width: 32,
